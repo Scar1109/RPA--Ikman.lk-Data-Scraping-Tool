@@ -3,11 +3,7 @@
     {
       "Path": null,
       "SortBy": 0,
-      "VariablesSectionElementsOrder": [
-        "userKeyword&",
-        "rowCount&",
-        "userDistricts&"
-      ],
+      "VariablesSectionElementsOrder": [],
       "ArgumentsSectionElementsOrder": null,
       "ConstantsSectionElementsOrder": [],
       "AddedNamespaces": null
@@ -16,6 +12,7 @@
       "Path": "Main.xaml",
       "SortBy": 0,
       "VariablesSectionElementsOrder": [
+        "ExtractDataTable&Sequence_1",
         "userDistricts&Sequence_1",
         "rowCount&Sequence_1",
         "userKeyword&Sequence_1"
