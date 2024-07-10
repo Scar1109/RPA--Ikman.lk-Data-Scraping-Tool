@@ -1,4 +1,4 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Main" sap2010:ExpressionActivityEditor.ExpressionActivityEditor="C#" sap:VirtualizedContainerService.HintSize="1233,2296" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uix="http://schemas.uipath.com/workflow/activities/uix" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="Main" sap2010:ExpressionActivityEditor.ExpressionActivityEditor="C#" sap:VirtualizedContainerService.HintSize="1233,1380" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uix="http://schemas.uipath.com/workflow/activities/uix" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
       <x:String>System.Activities</x:String>
@@ -40,6 +40,9 @@
       <x:String>System.ComponentModel</x:String>
       <x:String>System.Reflection</x:String>
       <x:String>System.Linq.Expressions</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>UiPath.UIAutomationNext.Models.ExtractData</x:String>
+      <x:String>System.Numerics</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -104,14 +107,25 @@
       <AssemblyReference>System.Collections</AssemblyReference>
       <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
       <AssemblyReference>System.Linq.Expressions</AssemblyReference>
+      <AssemblyReference>System.Private.Xml</AssemblyReference>
+      <AssemblyReference>System.Runtime.Numerics</AssemblyReference>
       <AssemblyReference>GlobalVariablesT1PNoYwrqg</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Main Sequence" sap:VirtualizedContainerService.HintSize="608,2231" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Main Sequence" sap:VirtualizedContainerService.HintSize="608,1691" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="userKeyword" />
       <Variable x:TypeArguments="x:Int32" Name="rowCount" />
-      <Variable x:TypeArguments="x:String" Name="userDistricts" />
+      <Variable x:TypeArguments="x:String" Name="userDistricts">
+        <Variable.Default>
+          <Literal x:TypeArguments="x:String">Kandy</Literal>
+        </Variable.Default>
+      </Variable>
+      <Variable x:TypeArguments="sd:DataTable" Name="ExtractDataTable">
+        <Variable.Default>
+          <CSharpValue x:TypeArguments="sd:DataTable" sap2010:WorkflowViewState.IdRef="CSharpValue`1_13">new System.Data.DataTable();</CSharpValue>
+        </Variable.Default>
+      </Variable>
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -122,6 +136,7 @@
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
       <ui:InputDialog Options="{x:Null}" OptionsString="{x:Null}" DisplayName="Keyword Input" sap:VirtualizedContainerService.HintSize="388,271" sap2010:WorkflowViewState.IdRef="InputDialog_1" IsPassword="False" Label="Enter a keyword to search" Title="Enter the Keyword">
@@ -146,13 +161,13 @@
         </ui:InputDialog.Result>
       </ui:InputDialog>
     </Sequence>
-    <uix:NApplicationCard AttachMode="ByInstance" DisplayName="Search the keyword" sap:VirtualizedContainerService.HintSize="546,1166" sap2010:WorkflowViewState.IdRef="NApplicationCard_1" InteractionMode="DebuggerApi" ScopeGuid="200cf9aa-407c-4263-9163-5bd0f95b6422" Version="V2">
+    <uix:NApplicationCard AttachMode="ByInstance" DisplayName="Search the keyword" sap:VirtualizedContainerService.HintSize="546,626" sap2010:WorkflowViewState.IdRef="NApplicationCard_1" InteractionMode="DebuggerApi" ScopeGuid="200cf9aa-407c-4263-9163-5bd0f95b6422" Version="V2">
       <uix:NApplicationCard.Body>
         <ActivityAction x:TypeArguments="x:Object">
           <ActivityAction.Argument>
             <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
           </ActivityAction.Argument>
-          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="512,926" sap2010:WorkflowViewState.IdRef="Sequence_2">
+          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="512,386" sap2010:WorkflowViewState.IdRef="Sequence_2">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -185,7 +200,7 @@
                   </uix:VerifyExecutionTypeIntoOptions>
                 </uix:NTypeInto.VerifyOptions>
               </uix:NTypeInto>
-              <uix:NClick ActivateBefore="True" ClickType="Single" DisplayName="Click 'BUTTON'" sap:VirtualizedContainerService.HintSize="388,216" sap2010:WorkflowViewState.IdRef="NClick_1" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="200cf9aa-407c-4263-9163-5bd0f95b6422" Version="V3">
+              <uix:NClick ActivateBefore="True" ClickType="Single" DisplayName="Click 'BUTTON'" sap:VirtualizedContainerService.HintSize="388,218" sap2010:WorkflowViewState.IdRef="NClick_1" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="200cf9aa-407c-4263-9163-5bd0f95b6422" Version="V3">
                 <uix:NClick.Target>
                   <uix:TargetAnchorable BrowserURL="https://ikman.lk/en" DesignTimeRectangle="1284, 313, 50, 50" DesignTimeScaleFactor="1" ElementType="Button" FullSelectorArgument="&lt;webctrl tag='BUTTON' type='submit' /&gt;" FuzzySelectorArgument="&lt;webctrl tag='BUTTON' type='submit' class='btn--1gFez default--T8kE3 small--1MQ15 search-button--1_VmY gtm-home-search-click' aaname='' /&gt;" Guid="6f3f6396-4a5a-49be-97cf-8c94fddc82ae" InformativeScreenshot="0ccd5958204cb6059f94320226fcdb55.png" ScopeSelectorArgument="&lt;html app='msedge.exe' title='ikman - Electronics, Cars, Property and Jobs in Sri Lanka' /&gt;" SearchSteps="FuzzySelector" Version="V4" Visibility="Interactive" />
                 </uix:NClick.Target>
@@ -201,15 +216,23 @@
                 </uix:NClick.VerifyOptions>
               </uix:NClick>
             </Sequence>
-            <Sequence sap:VirtualizedContainerService.HintSize="450,779" sap2010:WorkflowViewState.IdRef="Sequence_5">
+            <Sequence DisplayName="Select Location" sap:VirtualizedContainerService.HintSize="450,57" sap2010:WorkflowViewState.IdRef="Sequence_5">
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
+              <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" AutoCloseAfter="00:00:00" DisplayName="Message Box" sap:VirtualizedContainerService.HintSize="388,117" sap2010:WorkflowViewState.IdRef="MessageBox_1">
+                <ui:MessageBox.Text>
+                  <InArgument x:TypeArguments="x:Object">
+                    <CSharpValue x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpValue`1_4">userDistricts</CSharpValue>
+                  </InArgument>
+                </ui:MessageBox.Text>
+              </ui:MessageBox>
               <uix:NClick ActivateBefore="True" ClickType="Single" DisplayName="Click 'Select Location'" sap:VirtualizedContainerService.HintSize="388,225" sap2010:WorkflowViewState.IdRef="NClick_2" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="200cf9aa-407c-4263-9163-5bd0f95b6422" Version="V3">
                 <uix:NClick.Target>
-                  <uix:TargetAnchorable BrowserURL="https://ikman.lk/en/ads?query=iphone%2011" CVScreenId="802fd1f8-0eb4-4ef0-b273-47848bcdeb82" CvTextArea="499, 277, 107, 14" CvTextArgument="Select Location" CvType="Text" DesignTimeRectangle="464, 269, 142, 32" DesignTimeScaleFactor="1" ElementType="Button" FullSelectorArgument="&lt;html app='msedge.exe' title='Iphone 11 in * | ikman' /&gt;&lt;webctrl tag='BUTTON' type='button' css-selector='body&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;button' parentclass='sm-col-6--2MLq9 lg-col-6--g-Ot_  block--3v-Ow' /&gt;" FuzzySelectorArgument="&lt;webctrl aaname='Select Location' tag='BUTTON' type='button' class='btn--1gFez default--T8kE3 small--1MQ15 gtm-location-selector category-button--3Q-ZO' check:innerText='Select Location' /&gt;" Guid="870ce44e-f8da-4807-927b-7389a58c2c69" InformativeScreenshot="5df68520e02abdd704020cbb1f077a7e.png" ScopeSelectorArgument="&lt;html app='msedge.exe' title='Iphone 11 in Sri Lanka | ikman' /&gt;" SearchSteps="FuzzySelector, CV" Version="V4" Visibility="Interactive" />
+                  <uix:TargetAnchorable BrowserURL="https://ikman.lk/en/ads?query=iphone%2011" CVScreenId="802fd1f8-0eb4-4ef0-b273-47848bcdeb82" CvTextArea="499, 277, 107, 14" CvTextArgument="Select Location" CvType="Text" DesignTimeRectangle="464, 269, 142, 32" DesignTimeScaleFactor="1" ElementType="Button" FullSelectorArgument="&lt;html app='msedge.exe' title='* | ikman' /&gt;&lt;webctrl tag='BUTTON' type='button' css-selector='body&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;button' parentclass='sm-col-6--2MLq9 lg-col-6--g-Ot_  block--3v-Ow' /&gt;" FuzzySelectorArgument="&lt;webctrl aaname='Select Location' tag='BUTTON' type='button' class='btn--1gFez default--T8kE3 small--1MQ15 gtm-location-selector category-button--3Q-ZO' check:innerText='Select Location' /&gt;" Guid="870ce44e-f8da-4807-927b-7389a58c2c69" InformativeScreenshot="5df68520e02abdd704020cbb1f077a7e.png" ScopeSelectorArgument="&lt;html app='msedge.exe' title='Iphone 11 in Sri Lanka | ikman' /&gt;" SearchSteps="FuzzySelector, CV" Version="V4" Visibility="Interactive" />
                 </uix:NClick.Target>
                 <uix:NClick.VerifyOptions>
                   <uix:VerifyExecutionOptions DisplayName="{x:Null}" Mode="Appears">
@@ -222,14 +245,19 @@
                   </uix:VerifyExecutionOptions>
                 </uix:NClick.VerifyOptions>
               </uix:NClick>
-              <uix:NClick ActivateBefore="True" ClickType="Single" DisplayName="Click 'Colombo'" sap:VirtualizedContainerService.HintSize="388,225" sap2010:WorkflowViewState.IdRef="NClick_3" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="200cf9aa-407c-4263-9163-5bd0f95b6422" Version="V3">
+              <uix:NClick ActivateBefore="True" ClickType="Single" DisplayName="Click Destrict" sap:VirtualizedContainerService.HintSize="388,225" sap2010:WorkflowViewState.IdRef="NClick_10" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="200cf9aa-407c-4263-9163-5bd0f95b6422" Version="V3">
                 <uix:NClick.Target>
-                  <uix:TargetAnchorable BrowserURL="https://ikman.lk/en/ads?query=iphone%2011" CVScreenId="98116003-f22e-45cb-8c88-a0a77c47f809" CvElementArea="897, 320, 21, 25" CvTextArea="563, 325, 60, 14" CvTextArgument="Colombo" CvType="ArrowButton" DesignTimeRectangle="564, 311, 353, 40" DesignTimeScaleFactor="1" ElementType="Button" FullSelectorArgument="&lt;webctrl aaname='Colombo' tag='BUTTON' /&gt;" FuzzySelectorArgument="&lt;webctrl aaname='Colombo' tag='BUTTON' type='' class='list-item--2dM7Z item--OZFrC' check:innerText='Colombo' /&gt;" Guid="39856291-441c-4289-995e-bfd947398cea" InformativeScreenshot="ed3b35639fa35e5e2d963275f8387b45.png" ScopeSelectorArgument="&lt;html app='msedge.exe' title='Iphone 11 in Sri Lanka | ikman' /&gt;" SearchSteps="FuzzySelector, CV" Version="V4" Visibility="Interactive">
-                    <uix:TargetAnchorable.Anchors>
-                      <scg:List x:TypeArguments="uix:ITarget" Capacity="4">
-                        <uix:Target CVScreenId="98116003-f22e-45cb-8c88-a0a77c47f809" CvTextArea="563, 325, 60, 14" CvTextArgument="Colombo" CvType="Text" DesignTimeRectangle="564, 325, 59, 16" ElementType="Text" FullSelectorArgument="&lt;webctrl aaname='Colombo' tag='DIV' /&gt;" FuzzySelectorArgument="&lt;webctrl aaname='Colombo' tag='DIV' type='' class='name--4feK3' check:innerText='Colombo' /&gt;" Guid="de936dca-9a2b-4df9-a542-c41600e52d97" SearchSteps="FuzzySelector, CV" />
-                      </scg:List>
-                    </uix:TargetAnchorable.Anchors>
+                  <uix:TargetAnchorable BrowserURL="https://ikman.lk/en/ads?query=iphone" CVScreenId="c1e6b899-ac4b-487a-8f48-fb6be7de4849" CvElementArea="880, 576, 25, 30" CvTextArea="461, 584, 66, 20" CvType="ArrowButton" DesignTimeRectangle="464, 565, 440, 50" DesignTimeScaleFactor="1.25" ElementType="Button" FuzzySelectorArgument="&lt;webctrl aaname='Ampara' tag='BUTTON' type='' class='list-item--2dM7Z item--OZFrC' check:innerText='Ampara' /&gt;" Guid="c336c944-5b4d-4db5-9cbf-4a2f4f25c82e" InformativeScreenshot="437463c7634ab7fc3f9288c84fedb47d.png" ScopeSelectorArgument="&lt;html app='msedge.exe' title='* | ikman' /&gt;" SearchSteps="Selector, CV" Version="V4" Visibility="Interactive">
+                    <uix:TargetAnchorable.CvTextArgument>
+                      <InArgument x:TypeArguments="x:String">
+                        <CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_11">userDistricts</CSharpValue>
+                      </InArgument>
+                    </uix:TargetAnchorable.CvTextArgument>
+                    <uix:TargetAnchorable.FullSelectorArgument>
+                      <InArgument x:TypeArguments="x:String">
+                        <CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_10">string.Format("&lt;webctrl aaname='{0}' tag='BUTTON' /&gt;", userDistricts)</CSharpValue>
+                      </InArgument>
+                    </uix:TargetAnchorable.FullSelectorArgument>
                   </uix:TargetAnchorable>
                 </uix:NClick.Target>
                 <uix:NClick.VerifyOptions>
@@ -243,14 +271,14 @@
                   </uix:VerifyExecutionOptions>
                 </uix:NClick.VerifyOptions>
               </uix:NClick>
-              <uix:NClick ActivateBefore="True" ClickType="Single" DisplayName="Click 'All of Colombo'" sap:VirtualizedContainerService.HintSize="388,218" sap2010:WorkflowViewState.IdRef="NClick_4" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="200cf9aa-407c-4263-9163-5bd0f95b6422" Version="V3">
+              <uix:NClick ActivateBefore="True" ClickType="Single" DisplayName="Click Area" sap:VirtualizedContainerService.HintSize="388,218" sap2010:WorkflowViewState.IdRef="NClick_11" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="200cf9aa-407c-4263-9163-5bd0f95b6422" Version="V3">
                 <uix:NClick.Target>
-                  <uix:TargetAnchorable BrowserURL="https://ikman.lk/en/ads?query=iphone%2011" DesignTimeRectangle="941, 253, 352, 44" DesignTimeScaleFactor="1" ElementType="Button" FullSelectorArgument="&lt;webctrl aaname='All of Colombo' tag='BUTTON' /&gt;" FuzzySelectorArgument="&lt;webctrl aaname='All of Colombo' tag='BUTTON' type='' class='list-item--2dM7Z item--OZFrC' check:innerText='All of Colombo' /&gt;" Guid="d1885db5-c57f-4d1b-b77d-5c8c5a741e2d" InformativeScreenshot="07e1cbfcee987996abef6a8f91229a6d.png" ScopeSelectorArgument="&lt;html app='msedge.exe' title='Iphone 11 in Sri Lanka | ikman' /&gt;" SearchSteps="FuzzySelector" Version="V4" Visibility="Interactive">
-                    <uix:TargetAnchorable.Anchors>
-                      <scg:List x:TypeArguments="uix:ITarget" Capacity="4">
-                        <uix:Target DesignTimeRectangle="941, 267, 95, 16" ElementType="Text" FullSelectorArgument="&lt;webctrl aaname='All of Colombo' tag='DIV' /&gt;" FuzzySelectorArgument="&lt;webctrl aaname='All of Colombo' tag='DIV' type='' class='name--4feK3' check:innerText='All of Colombo' /&gt;" Guid="6fcf7c85-39ae-4211-9479-5731f2a3c72e" SearchSteps="FuzzySelector" />
-                      </scg:List>
-                    </uix:TargetAnchorable.Anchors>
+                  <uix:TargetAnchorable BrowserURL="https://ikman.lk/en/ads?query=iphone" CVScreenId="8a7f2db9-e4f4-4aa8-bf49-9a88ae5918dc" CvTextArea="932, 326, 122, 17" CvTextArgument="All of Colombo" CvType="Text" DesignTimeRectangle="935, 308, 440, 55" DesignTimeScaleFactor="1.25" ElementType="Button" FuzzySelectorArgument="&lt;webctrl aaname='All of ' tag='BUTTON' type='' class='list-item--2dM7Z item--OZFrC' check:innerText='All of Colombo' /&gt;" Guid="752316da-e0f8-4335-a031-03e40327e182" InformativeScreenshot="08d78f4f79d35de3a6e383fd71656533.png" ScopeSelectorArgument="&lt;html app='msedge.exe' title='* | ikman' /&gt;" SearchSteps="Selector, CV" Version="V4" Visibility="Interactive">
+                    <uix:TargetAnchorable.FullSelectorArgument>
+                      <InArgument x:TypeArguments="x:String">
+                        <CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_12">string.Format("&lt;webctrl aaname='All of {0}' tag='BUTTON' /&gt;", userDistricts)</CSharpValue>
+                      </InArgument>
+                    </uix:TargetAnchorable.FullSelectorArgument>
                   </uix:TargetAnchorable>
                 </uix:NClick.Target>
                 <uix:NClick.VerifyOptions>
@@ -265,6 +293,30 @@
                 </uix:NClick.VerifyOptions>
               </uix:NClick>
             </Sequence>
+            <uix:NExtractData AppendResults="False" ContinueOnError="True" DisplayName="Extract Table Data" ExtractDataSettings="&lt;Table xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xmlns:xsd='http://www.w3.org/2001/XMLSchema' Type='Structured' AddCvHeader='true' IsScrollEnabled='false'&gt;&#xD;&#xA;&#x9;&lt;Column xsi:type='DataColumn' ReferenceName='Column0' Name='Title'&gt;&#xD;&#xA;&#x9;&#x9;&lt;IsValidName&gt;true&lt;/IsValidName&gt;&#xD;&#xA;&#x9;&#x9;&lt;ValidationErrorMessage /&gt;&#xD;&#xA;&#x9;&#x9;&lt;IsExtra&gt;false&lt;/IsExtra&gt;&#xD;&#xA;&#x9;&#x9;&lt;CanExtractSimilar&gt;true&lt;/CanExtractSimilar&gt;&#xD;&#xA;&#x9;&#x9;&lt;Format xsi:type='TextColumnFormat' /&gt;&#xD;&#xA;&#x9;&lt;/Column&gt;&#xD;&#xA;&#x9;&lt;Column xsi:type='DataColumn' ReferenceName='Column1' Name='URL'&gt;&#xD;&#xA;&#x9;&#x9;&lt;IsValidName&gt;true&lt;/IsValidName&gt;&#xD;&#xA;&#x9;&#x9;&lt;ValidationErrorMessage /&gt;&#xD;&#xA;&#x9;&#x9;&lt;IsExtra&gt;true&lt;/IsExtra&gt;&#xD;&#xA;&#x9;&#x9;&lt;CanExtractSimilar&gt;true&lt;/CanExtractSimilar&gt;&#xD;&#xA;&#x9;&#x9;&lt;Format xsi:type='TextColumnFormat' /&gt;&#xD;&#xA;&#x9;&lt;/Column&gt;&#xD;&#xA;&#x9;&lt;Column xsi:type='DataColumn' ReferenceName='Column2' Name='Location'&gt;&#xD;&#xA;&#x9;&#x9;&lt;IsValidName&gt;true&lt;/IsValidName&gt;&#xD;&#xA;&#x9;&#x9;&lt;ValidationErrorMessage /&gt;&#xD;&#xA;&#x9;&#x9;&lt;IsExtra&gt;false&lt;/IsExtra&gt;&#xD;&#xA;&#x9;&#x9;&lt;CanExtractSimilar&gt;true&lt;/CanExtractSimilar&gt;&#xD;&#xA;&#x9;&#x9;&lt;Format xsi:type='TextColumnFormat' /&gt;&#xD;&#xA;&#x9;&lt;/Column&gt;&#xD;&#xA;&#x9;&lt;Column xsi:type='DataColumn' ReferenceName='Column3' Name='Price'&gt;&#xD;&#xA;&#x9;&#x9;&lt;IsValidName&gt;true&lt;/IsValidName&gt;&#xD;&#xA;&#x9;&#x9;&lt;ValidationErrorMessage /&gt;&#xD;&#xA;&#x9;&#x9;&lt;IsExtra&gt;false&lt;/IsExtra&gt;&#xD;&#xA;&#x9;&#x9;&lt;CanExtractSimilar&gt;true&lt;/CanExtractSimilar&gt;&#xD;&#xA;&#x9;&#x9;&lt;Format xsi:type='TextColumnFormat' /&gt;&#xD;&#xA;&#x9;&lt;/Column&gt;&#xD;&#xA;&#x9;&lt;Column xsi:type='DataColumn' ReferenceName='Column5' Name='Time'&gt;&#xD;&#xA;&#x9;&#x9;&lt;IsValidName&gt;true&lt;/IsValidName&gt;&#xD;&#xA;&#x9;&#x9;&lt;ValidationErrorMessage /&gt;&#xD;&#xA;&#x9;&#x9;&lt;IsExtra&gt;false&lt;/IsExtra&gt;&#xD;&#xA;&#x9;&#x9;&lt;CanExtractSimilar&gt;true&lt;/CanExtractSimilar&gt;&#xD;&#xA;&#x9;&#x9;&lt;Format xsi:type='TextColumnFormat' /&gt;&#xD;&#xA;&#x9;&lt;/Column&gt;&#xD;&#xA;&#x9;&lt;Column xsi:type='DataNextLink' /&gt;&#xD;&#xA;&lt;/Table&gt;" ExtractMetadata="&lt;extract&gt;&lt;row exact='1'&gt;&lt;webctrl tag='li' /&gt;&lt;webctrl tag='a' idx='1' /&gt;&lt;webctrl tag='div' idx='1' /&gt;&lt;webctrl tag='div' idx='2' /&gt;&lt;/row&gt;&lt;column exact='1' name='Column0' attr='fulltext' name2='Column1' attr2='href'&gt;&lt;webctrl tag='li' /&gt;&lt;webctrl tag='a' idx='1' /&gt;&lt;webctrl tag='div' idx='1' /&gt;&lt;webctrl tag='div' idx='2' /&gt;&lt;webctrl tag='h2' idx='1' /&gt;&lt;/column&gt;&lt;column exact='1' name='Column2' attr='fulltext'&gt;&lt;webctrl tag='li' /&gt;&lt;webctrl tag='a' idx='1' /&gt;&lt;webctrl tag='div' idx='1' /&gt;&lt;webctrl tag='div' idx='2' /&gt;&lt;webctrl tag='div' idx='1' /&gt;&lt;webctrl tag='div' idx='3' /&gt;&lt;/column&gt;&lt;column exact='1' name='Column3' attr='fulltext'&gt;&lt;webctrl tag='li' /&gt;&lt;webctrl tag='a' idx='1' /&gt;&lt;webctrl tag='div' idx='1' /&gt;&lt;webctrl tag='div' idx='2' /&gt;&lt;webctrl tag='div' idx='1' /&gt;&lt;webctrl tag='div' idx='4' /&gt;&lt;webctrl tag='span' idx='1' /&gt;&lt;/column&gt;&lt;column exact='1' name='Column5' attr='fulltext'&gt;&lt;webctrl tag='li' /&gt;&lt;webctrl tag='a' idx='1' /&gt;&lt;webctrl tag='div' idx='1' /&gt;&lt;webctrl tag='div' idx='2' /&gt;&lt;webctrl tag='div' idx='2' /&gt;&lt;/column&gt;&lt;/extract&gt;" sap:VirtualizedContainerService.HintSize="450,182" sap2010:WorkflowViewState.IdRef="NExtractData_1" LimitExtractionTo="Rows" ScopeIdentifier="200cf9aa-407c-4263-9163-5bd0f95b6422" Version="V3">
+              <uix:NExtractData.DataTable>
+                <InOutArgument x:TypeArguments="sd:DataTable">
+                  <CSharpReference x:TypeArguments="sd:DataTable" sap2010:WorkflowViewState.IdRef="CSharpReference`1_5">ExtractDataTable</CSharpReference>
+                </InOutArgument>
+              </uix:NExtractData.DataTable>
+              <uix:NExtractData.MaximumResults>
+                <InArgument x:TypeArguments="x:Int32">
+                  <CSharpValue x:TypeArguments="x:Int32" sap2010:WorkflowViewState.IdRef="CSharpValue`1_14">rowCount</CSharpValue>
+                </InArgument>
+              </uix:NExtractData.MaximumResults>
+              <uix:NExtractData.NextLink>
+                <uix:TargetAnchorable BrowserURL="https://ikman.lk/en/ads/colombo?sort=date&amp;order=desc&amp;buy_now=0&amp;urgent=0&amp;query=iphone&amp;page=1" CVScreenId="fdc456cb-3718-4171-a93b-0f10224e9224" CvElementArea="1236, 511, 25, 27" CvTextArea="1185, 515, 45, 17" CvTextArgument="Next" CvType="ArrowButton" DesignTimeRectangle="1185, 508, 79, 34" DesignTimeScaleFactor="1.25" FullSelectorArgument="&lt;webctrl aaname='Next' parentid='app-wrapper' tag='DIV' /&gt;" FuzzySelectorArgument="&lt;webctrl aaname='Next' parentid='app-wrapper' tag='DIV' type='' class='action-button--1O8tU' check:innerText='Next' /&gt;" Guid="cad053e2-fe2c-4dbc-8182-3d5dc4199445" ScopeSelectorArgument="&lt;html app='msedge.exe' title='Iphone in Colombo | ikman' /&gt;" SearchSteps="FuzzySelector, CV" Version="V4" Visibility="Interactive" />
+              </uix:NExtractData.NextLink>
+              <uix:NExtractData.Target>
+                <uix:TargetAnchorable BrowserURL="https://ikman.lk/en/ads/colombo?sort=date&amp;order=desc&amp;buy_now=0&amp;urgent=0&amp;query=iphone&amp;page=1" DesignTimeRectangle="657, -188, 637, 4741" DesignTimeScaleFactor="1.25" ElementType="List" FullSelectorArgument="&lt;webctrl css-selector='body&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;ul' parentid='app-wrapper' tag='UL' /&gt;" Guid="c27d1ca0-8815-49b7-96b5-3201ebade239" InformativeScreenshot="d27ffdb69c8edde9e3fdafe3187ddd88.png" ScopeSelectorArgument="&lt;html app='msedge.exe' title='* | ikman' /&gt;" SearchSteps="Selector" Version="V4" Visibility="Interactive" />
+              </uix:NExtractData.Target>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </uix:NExtractData>
           </Sequence>
         </ActivityAction>
       </uix:NApplicationCard.Body>
